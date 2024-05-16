@@ -36,7 +36,7 @@ namespace CurrencyConverter.Controllers
         {
             if (String.IsNullOrEmpty(conversionCurrency))
             {
-                return StatusCode((int)HttpStatusCode.UnprocessableEntity, "Conversion currency is required");
+                return StatusCode((int)HttpStatusCode.BadRequest, "Conversion currency is required");
             }
             bool checkCurrency = UtilityHelper.checkCurrency(conversionCurrency);
             if (checkCurrency)
@@ -62,14 +62,14 @@ namespace CurrencyConverter.Controllers
         {
             if (String.IsNullOrEmpty(fromDate) || String.IsNullOrEmpty(toDate)) 
             {
-                return StatusCode((int)HttpStatusCode.UnprocessableEntity, "From Date cannot be greater then currentDate or to date");
+                return StatusCode((int)HttpStatusCode.BadRequest, "From Date cannot be greater then currentDate or to date");
             }
             DateTime FromDate = DateTime.ParseExact(fromDate, UtilityHelper.DATETIME_FORMAT_yyyy_MM_dd, CultureInfo.InvariantCulture);
             DateTime ToDate = DateTime.ParseExact(toDate, UtilityHelper.DATETIME_FORMAT_yyyy_MM_dd, CultureInfo.InvariantCulture);
 
             if (FromDate > DateTime.Now || FromDate > ToDate) 
             {
-                return StatusCode((int)HttpStatusCode.UnprocessableEntity, "From Date cannot be greater then currentDate or to date");
+                return StatusCode((int)HttpStatusCode.BadRequest, "From Date cannot be greater then currentDate or to date");
             }
             var historicalRates = await _frankFurter.HistoricalRates(baseCurrency, fromDate, toDate, pageNumber, pageSize);
             if (historicalRates.ContainsKey(HttpStatusCode.OK))
