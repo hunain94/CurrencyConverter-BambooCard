@@ -70,29 +70,31 @@ namespace BAL.Repository
                 JObject result = JObject.Parse(jsonResult);
 
                 HistoricalRates historical = new HistoricalRates();
-                
+
                 List<CurrencyDateModel> rates = new List<CurrencyDateModel>();
-                historical.amount = Convert.ToDouble(result.ContainsKey("amount"));
-                historical.@base = Convert.ToString(result.ContainsKey("base"));
-                historical.start_date = Convert.ToString(result.ContainsKey("start_date"));
-                historical.end_date = Convert.ToString(result.ContainsKey("end_date"));
-                foreach (var item in ((Newtonsoft.Json.Linq.JContainer)((Newtonsoft.Json.Linq.JProperty)result.Last).Value))
+
+                HistoryDataModel dataModel = JsonConvert.DeserializeObject<HistoryDataModel>(result.ToString());
+                historical.amount = dataModel.amount;
+                historical.@base = dataModel.@base;
+                historical.start_date = dataModel.start_date;
+                historical.end_date = dataModel.end_date;
+                foreach (var item in (JContainer)((JProperty)result.Last).Value)
                 {
                     CurrencyDateModel model = new CurrencyDateModel();
-                    model.currencyDate = ((Newtonsoft.Json.Linq.JProperty)item).Name;
+                    model.currencyDate = ((JProperty)item).Name;
                     model.currencyRates = JsonConvert.DeserializeObject<Rates>(item.First.ToString());
                     rates.Add(model);
-
                 }
-                historical.TotalRecords = rates.Count();
+                
                 historical.rates = rates.ToList().ToPagedList(pageNumber, pageLength);
+                historical.TotalRecords = historical.rates.TotalItemCount;
                 historicalRates.Add(response.StatusCode, historical);
             }
-            else 
+            else
             {
                 historicalRates.Add(response.StatusCode, new Models.HistoricalRates());
             }
-            
+
             return historicalRates;
         }
 

@@ -41,6 +41,19 @@ namespace BAL.Models
         public double USD { get; set; }
         public double ZAR { get; set; }
     }
+    public class ConvertedRate
+    {
+        public double USD { get; set; }
+    }
+
+    public class ConversionModel
+    {
+        public decimal amount { get; set; }
+        public string @base { get; set; }
+        public string date { get; set; }
+        public ConvertedRate rates { get; set; }
+    }
+
 
     public class LatestCurrencyRatesModel
     {
@@ -67,6 +80,13 @@ namespace BAL.Models
     {
         public string currencyCode { get; set; }
         public string currencyValue { get; set; }
+    }
+    public class HistoryDataModel 
+    {
+        public double amount { get; set; }
+        public string @base { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
     }
 
 }
