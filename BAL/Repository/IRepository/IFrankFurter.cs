@@ -10,8 +10,8 @@ namespace BAL.Repository.IRepository
 {
     public interface IFrankFurter
     {
-        Task<Dictionary<HttpStatusCode, object>> LatestRates(string baseCurrency);
+        Task<Dictionary<HttpStatusCode, LatestCurrencyRatesModel>> LatestRates(string baseCurrency);
         Task<Dictionary<HttpStatusCode, object>> CurrencyConversion(decimal amount, string baseCurremcy, string toCurrency);
-        Task<Dictionary<HttpStatusCode, object>> HistoricalRates(string fromDate, string toDate, string baseCurrency);
+        Task<Dictionary<HttpStatusCode, HistoricalRates>> HistoricalRates(string fromDate, string toDate, string baseCurrency, int pageNumber, int pageLength);
     }
 }

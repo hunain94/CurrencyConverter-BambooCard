@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace BAL.Models
 {
-    
+
     public class Rates
     {
         public double AUD { get; set; }
@@ -48,5 +49,24 @@ namespace BAL.Models
         public string date { get; set; }
         public Rates rates { get; set; }
     }
-    
+    public class HistoricalRates
+    {
+        public double amount { get; set; }
+        public string @base { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
+        public int TotalRecords { get; set; }
+        public IPagedList<CurrencyDateModel> rates { get; set; }
+    }
+    public class CurrencyDateModel
+    {
+        public string currencyDate { get; set; }
+        public Rates currencyRates { get; set; }
+    }
+    public class CurrencyRatesModel
+    {
+        public string currencyCode { get; set; }
+        public string currencyValue { get; set; }
+    }
+
 }

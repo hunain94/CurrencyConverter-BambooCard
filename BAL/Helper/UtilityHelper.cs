@@ -8,6 +8,7 @@ namespace BAL.Helper
 {
     public class UtilityHelper
     {
+        public static string DATETIME_FORMAT_yyyy_MM_dd = "yyyy-MM-dd";
         public static bool checkCurrency(string currency)
         {
             List<string> exceptionList = new List<string> { "TRY", "PLN", "THB", "MXN" };

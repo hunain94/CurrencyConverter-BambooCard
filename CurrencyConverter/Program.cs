@@ -1,5 +1,7 @@
+using BAL.Helper;
 using BAL.Repository;
 using BAL.Repository.IRepository;
+using Microsoft.Extensions.Hosting;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 
@@ -24,10 +26,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -35,3 +38,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
