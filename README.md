@@ -1,7 +1,5 @@
 # CurrencyConverter
 
-git repository is available here https://github.com/hunain94/CurrencyConverter-BambooCard
-
 To run the application
 Please run this project in VS 2022 
 Debug the project and you will be redirected to http://localhost:5294/swagger/index.html
