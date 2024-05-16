@@ -11,9 +11,9 @@ To allow reattmpt to Frankfurt APIs I have used Polly library and have initializ
 For exception handling I have written a middleware class in the BAL library.
 
 
-Assumptions
+Assumptions -
 I have assumed that dates that will be sent as a request param in the historical records will be (yyyy-MM-dd) format.
 
 
-Enhancements
+Enhancements -
 I would have also implemented logging if I had the time. 
